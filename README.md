@@ -39,6 +39,15 @@
 
 ### 2.2 Интерфейс пользователя
 **Главная страница**
+![1111](https://github.com/JustMustKill/Weather-Board/blob/main/mockups/MainPage.png)
+
+**Прогноз на сегодня**
+![1111](https://github.com/JustMustKill/Weather-Board/blob/main/mockups/Today%20weather.png)
+
+**Прогноз на неделю**
+![1111](https://github.com/JustMustKill/Weather-Board/blob/main/mockups/7%20day.png)
+
+
 
 ## 3 Системные требования
 Для использования приложения необходим браузер.
