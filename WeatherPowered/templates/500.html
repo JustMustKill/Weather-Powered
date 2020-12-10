@@ -1,0 +1,300 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
+    @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');
+
+    @keyframes floating {
+        from {
+            transform: translateY(0px);
+        }
+        65% {
+            transform: translateY(15px);
+        }
+        to {
+            transform: translateY(0px);
+        }
+    }
+    html {
+        height: 100%;
+    }
+
+    body {
+        background-image: url("https://assets.codepen.io/1538474/star.svg"), linear-gradient(to bottom, #05007A, #4D007D);
+        height: 100%;
+        margin: 0;
+        background-attachment: fixed;
+        overflow: hidden;
+    }
+
+    .mars {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        height: 27vmin;
+        background: url("https://assets.codepen.io/1538474/mars.svg") no-repeat bottom center;
+        background-size: cover;
+    }
+
+    .logo-404 {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 16vmin;
+        width: 30vmin;
+    }
+    @media (max-width: 480px) and (min-width: 320px) {
+        .logo-404 {
+            top: 45vmin;
+        }
+    }
+
+    .meteor {
+        position: absolute;
+        right: 2vmin;
+        top: 16vmin;
+    }
+
+    .title {
+        color: white;
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        text-align: center;
+        font-size: 5vmin;
+        margin-top: 31vmin;
+    }
+    @media (max-width: 480px) and (min-width: 320px) {
+        .title {
+            margin-top: 65vmin;
+        }
+    }
+
+    .subtitle {
+        color: white;
+        font-family: "Nunito", sans-serif;
+        font-weight: 400;
+        text-align: center;
+        font-size: 3.5vmin;
+        margin-top: -1vmin;
+        margin-bottom: 9vmin;
+    }
+
+    .btn-back {
+        border: 1px solid white;
+        color: white;
+        height: 5vmin;
+        padding: 12px;
+        font-family: "Nunito", sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .btn-back:hover {
+        background: white;
+        color: #4D007D;
+    }
+    @media (max-width: 480px) and (min-width: 320px) {
+        .btn-back {
+            font-size: 3.5vmin;
+        }
+    }
+
+    .astronaut {
+        position: absolute;
+        top: 18vmin;
+        left: 10vmin;
+        height: 30vmin;
+        animation: floating 3s infinite ease-in-out;
+    }
+    @media (max-width: 480px) and (min-width: 320px) {
+        .astronaut {
+            top: 2vmin;
+        }
+    }
+
+    .spaceship {
+        position: absolute;
+        bottom: 15vmin;
+        right: 24vmin;
+    }
+    @media (max-width: 480px) and (min-width: 320px) {
+        .spaceship {
+            width: 45vmin;
+            bottom: 18vmin;
+        }
+    }
+
+    * {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .centered {
+        height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+        margin-bottom: 50px;
+        font-family: 'Lato', sans-serif;
+        font-size: 50px;
+    }
+
+    .message {
+        display: inline-block;
+        line-height: 1.2;
+        transition: line-height .2s, width .2s;
+        overflow: hidden;
+    }
+
+    .message,
+    .hidden {
+        font-family: 'Roboto Slab', serif;
+        font-size: 18px;
+    }
+
+    .hidden {
+        color: #FFF;
+    }
+</style>
+
+<head>
+    <title>City Not Found</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="mars"></div>
+<img src="https://assets.codepen.io/1538474/meteor.svg" class="meteor" />
+<section class="centered">
+    <h1>505 The entered city was not found</h1>
+    <div class="container" style="margin-left: 35%">
+        <span class="message" id="js-whoops"></span> <span class="message" id="js-appears"></span> <span class="message" id="js-error"></span> <span class="message" id="js-apology"></span>
+        <div><span class="hidden" id="js-hidden">Message Here</span></div>
+    </div>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search city" style="width: 325px" name="userInput" required pattern="^[A-Za-zА-Яа-яЁё\-]+$">
+        <button class="btn btn-warning" type="submit">Try again</button>
+    </form>
+</section>
+<img src="https://assets.codepen.io/1538474/astronaut.svg" class="astronaut" />
+<img src="https://assets.codepen.io/1538474/spaceship.svg" class="spaceship" />
+
+<script>
+    // Here are the different messages we'll use for creating the 500 displayable message
+    const messages = [
+        ['Whoops.', 'Oops.', 'Excuse me.', 'Oh Dear.', 'Well poo.', 'Hm...', 'This is awkward.', 'Well gosh!'],
+        ['It appears', 'Looks like', 'Unfortunately,', 'It just so happens', 'Sadly,', 'Seemingly from nowhere'],
+        ['there was an error.', 'we goofed up.', 'a bad thing happend.', 'the server crashed.', 'a bug appeared.', 'someone did a naughty.', 'pixies got into the server!', 'the server threw a tantrum.', 'the website had a bad day.', 'our code pooped out.'],
+        ['Sorry.', 'Apologies.', 'Our bad.', 'Sad day.', 'We are quite contrite.', 'Beg pardon.']
+    ];
+
+    // These are the different elements we'll be populating. They are in the same order as the messages array
+    const messageElements = [
+        document.querySelector('#js-whoops'),
+        document.querySelector('#js-appears'),
+        document.querySelector('#js-error'),
+        document.querySelector('#js-apology')
+    ];
+
+    // we'll use this element for width calculations
+    const widthElement = document.querySelector('#js-hidden');
+    // keeping track of the message we just displayed last
+    let lastMessageType = -1;
+    // How often the page should swap messages
+    let messageTimer = 4000;
+
+    // on document load, setup the initial messages AND set a timer for setting messages
+    document.addEventListener('DOMContentLoaded', (event) => {
+        setupMessages();
+        setInterval(() => {
+            swapMessage();
+        }, messageTimer);
+    });
+
+    // Get initial messages for each message element
+    function setupMessages() {
+        messageElements.forEach((element, index) => {
+            let newMessage = getNewMessage(index);
+            element.innerText = newMessage;
+        });
+    }
+
+    // set the width of a given element to match its text's width
+    function calculateWidth(element, message) {
+        // use our dummy hidden element to get the text's width. Then use that to set the real element's width
+        widthElement.innerText = message;
+        let newWidth = widthElement.getBoundingClientRect().width;
+        element.style.width = `${newWidth}px`;
+    }
+
+    // swap a message for one of the message types
+    function swapMessage() {
+        let toSwapIndex = getNewSwapIndex();
+        let newMessage  = getNewMessage(toSwapIndex);
+        // Animate the disappearing, setting width, and reappearing
+        messageElements[toSwapIndex].style.lineHeight = '0';
+        // once line height is done transitioning, set element width & message
+        setTimeout(() => {
+            // make sure the element has a width set for transitions
+            checkWidthSet(toSwapIndex, messageElements[toSwapIndex].innerText);
+            // set the new text
+            messageElements[toSwapIndex].innerText = newMessage;
+            // set the new width
+            calculateWidth(messageElements[toSwapIndex], newMessage);
+        }, 200);
+        // once width is done, transition the lineheight back to 1 so we can view the message
+        setTimeout(() => {
+            messageElements[toSwapIndex].style.lineHeight = '1.2';
+        }, 400);
+    }
+
+    // We need to make sure that the element at the passed index has a width set so we can use transitions
+    function checkWidthSet(index, message) {
+        if (false == messageElements[index].style.width) {
+            messageElements[index].style.width = `${messageElements[index].clientWidth}px`;
+        }
+    }
+
+    // Return a new index to swap message in. Should not be the same as the last message type swapped
+    function getNewSwapIndex() {
+        let newMessageIndex = Math.floor(Math.random() * messages.length);
+        while (lastMessageType == newMessageIndex) {
+            newMessageIndex = Math.floor(Math.random() * messages.length);
+        }
+        return newMessageIndex;
+    }
+
+    // Get a new message for the message element.
+    function getNewMessage(toSwapIndex) {
+        const messagesArray   = messages[toSwapIndex];
+        const previousMessage = messageElements[toSwapIndex].innerText;
+        // Get a new random index and the message at that index
+        let newMessageIndex = Math.floor(Math.random() * messagesArray.length);
+        let newMessage      = messagesArray[newMessageIndex];
+        // let's make sure they aren't the same as the message already there
+        while (newMessage == previousMessage) {
+            newMessageIndex = Math.floor(Math.random() * messagesArray.length);
+            newMessage      = messagesArray[newMessageIndex];
+        }
+        return newMessage;
+    }
+</script>
+
+</body>
+</html>
